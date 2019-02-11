@@ -1,0 +1,67 @@
+CREATE TABLE 
+	driver(
+		id BIGINT NOT NULL,
+		status BOOLEAN NOT NULL,
+		first_name VARCHAR,
+		middle_name VARCHAR,
+		last_name VARCHAR,
+		phone_number VARCHAR,
+		email VARCHAR,
+		dob DATETIME,
+		doc_type VARCHAR,
+		doc_number VARCHAR,
+		driver_license_number VARCHAR,
+		license_issue_date DATETIME,
+		PRIMARY KEY (id)
+);
+
+
+CREATE TABLE
+    hibernate_sequence
+    (
+        next_val BIGINT
+    );
+
+INSERT INTO driver (id, status, first_name, last_name, middle_name, email, phone_number, dob, doc_type, doc_number, driver_license_number, license_issue_date)
+  VALUES (1, 1, 'NGIRIMANA', 'Laurien','Yani', 'laurient20@hmail.com', '250785697706','4419619200000','NID', '1234569874563215', '328-443-5555', 4419619200000);
+INSERT INTO driver (id, status, first_name, last_name, middle_name, email, phone_number, dob, doc_type, doc_number, driver_license_number, license_issue_date)
+  VALUES (2, 0, 'KABERA', 'Gilbert','Gakwego', 'kgilebert@hmail.com', '250788510761','4419619200000','NID', '1234569874563215', '328-443-5555', 4419619200000);
+INSERT INTO driver (id, status, first_name, last_name, middle_name, email, phone_number, dob, doc_type, doc_number, driver_license_number, license_issue_date)
+  VALUES (3, 1, 'UWIMPAYE', 'Grace','', 'guwimpaye@hmail.com', '250788510866','4419619200000','NID', '3256987452369854', '328-443-5555', 4419619200000);
+
+INSERT INTO hibernate_sequence (next_val) VALUES (4);
+
+
+CREATE TABLE 
+	trip(
+		id BIGINT NOT NULL,
+		status BOOLEAN NOT NULL,
+		name VARCHAR,
+		origin VARCHAR,
+		destination VARCHAR,
+		distance VARCHAR,
+		longitude DOUBLE,
+		latitude DOUBLE,
+		price NUMERIC,
+		start_date DATETIME,
+		description VARCHAR,
+		PRIMARY KEY (id)
+);
+
+INSERT INTO trip (id, status, name, origin, destination, distance, price, startDate)
+  VALUES (1, 1, 'KIGALI-RUBAVU', 'KIGALI','RUBAVU', '3000KM', 3500, 4419619200000);
+  
+  
+CREATE TABLE 
+	rider(
+		id BIGINT NOT NULL,
+		status BOOLEAN NOT NULL,
+		longitude DOUBLE,
+		latitude DOUBLE,
+		start_date_time DATETIME,
+		end_date_time DATETIME,
+		PRIMARY KEY (id),
+		FOREIGN KEY (id) REFERENCES driver(driver_id),
+		FOREIGN KEY (id) REFERENCES trip(trip_id)
+);
+
